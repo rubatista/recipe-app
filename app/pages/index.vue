@@ -1,6 +1,10 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { type RecipeResponse } from '../../types/types'
+
+const { data, error } = await useFetch<RecipeResponse>('https://dummyjson.com/recipes?limit=12')
+</script>
 <template>
-    <main>
+  <main>
     <section class="bg-[#f1f1f1]">
       <div class="container flex flex-col lg:flex-row items-center py-20 gap-10">
         <div class="flex-1 order-2 lg:order-1 text-center lg:text-left">
@@ -17,7 +21,13 @@
           </button>
         </div>
         <div class="flex-1 order-1 lg:order-2">
-          <NuxtImg src="/nuxt-course-hero.png" format="webp" sizes="xs:100vw sm:667px " densities="x1" alt="" />
+          <NuxtImg
+            src="/nuxt-course-hero.png"
+            format="webp"
+            sizes="xs:100vw sm:667px "
+            densities="x1"
+            alt=""
+          />
         </div>
       </div>
     </section>
@@ -25,22 +35,33 @@
       <h2 class="text-3xl lg:text-5xl mb-2">Discover, Create, Share</h2>
       <p class="text-lg lg:text-xl mb-8">Check out our most popular recipes!</p>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-8">
-        <div class="flex flex-col shadow rounded-md">
-          <img src="" alt="" class="rounded-t-md" />
+        <div
+          v-for="recipe in data?.recipes"
+          :key="recipe.id"
+          class="flex flex-col shadow rounded-md"
+        >
+          <NuxtImg
+            :src="recipe.image"
+            :alt="recipe.name"
+            sizes="xs:100vw sm:50vw lg:500px"
+            densities="x1"
+            format="webp"
+            class="rounded-t-md"
+          />
           <div class="flex flex-col py-6 px-4 flex-1">
-            <p class="text-xl lg:text-2xl font-semibold mb-2">Recipe Name</p>
+            <p class="text-xl lg:text-2xl font-semibold mb-2">{{ recipe.name }}</p>
             <div class="font-normal w-full bg-white/80 flex gap-8 text-lg lg:text-xl mb-4 mt-auto">
               <div class="flex items-center gap-1">
                 <Icon name="mdi:clock-time-eight-outline" style="color: #f79f1a" />
-                <span>Cook Time</span>
+                <span>{{ recipe.cookTimeMinutes }}</span>
               </div>
               <div class="flex items-center gap-1">
                 <Icon name="mdi:fire" style="color: #f79f1a" />
-                <span>Calories</span>
+                <span>{{ recipe.caloriesPerServing }}</span>
               </div>
               <div class="flex items-center gap-1">
                 <Icon name="mdi:star" style="color: #f79f1a" />
-                <span>Rating (Review Count)</span>
+                <span>{{ recipe.rating }} ({{ recipe.reviewCount }})</span>
               </div>
             </div>
             <button

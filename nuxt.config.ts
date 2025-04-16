@@ -12,25 +12,20 @@ export default defineNuxtConfig({
     relativeWatchPaths: true,
     defaults: {
       useAsyncData: {
-        deep: true
-      }
-    }
+        deep: true,
+      },
+    },
   },
   unhead: {
     renderSSRHeadOptions: {
-      omitLineBreaks: false
+      omitLineBreaks: false,
     },
   },
   devtools: { enabled: true },
-  modules: [
-    '@nuxtjs/tailwindcss',
-    '@nuxtjs/google-fonts',
-    '@nuxt/icon',
-    '@nuxt/image'
-  ],
+  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/google-fonts', '@nuxt/icon', '@nuxt/image'],
   googleFonts: {
     families: {
       Montserrat: true,
-    }
-  }
+    },
+  },
 })
