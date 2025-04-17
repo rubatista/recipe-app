@@ -10,6 +10,19 @@ if (error.value) {
     statusMessage: error.value.statusMessage,
   })
 }
+
+useSeoMeta({
+  title: data.value?.name,
+  description: 'Recipes for you to cook for you and your family and friends!',
+  ogTitle: data.value?.name,
+  ogDescription: 'wwww.recipeapp.com',
+  ogImage: data.value?.image,
+  ogUrl: `http:localhost:3000/recipes/${data.value?.id}`,
+  twitterTitle: data.value?.name,
+  twitterDescription: 'Recipes for you to cook for you and your family and friends!',
+  twitterImage: data.value?.image,
+  twitterCard: 'summary',
+})
 </script>
 <template>
   <div class="flex flex-col max-w-screen-lg container py-20">
